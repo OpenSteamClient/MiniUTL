@@ -24,10 +24,12 @@
 		#else
 			#define FMTFUNCTION( fmtargnumber, firstvarargnumber ) __attribute__ (( format( __printf__, fmtargnumber, firstvarargnumber )))
 		#endif
-		#if __GNUC__ >= 4
-			#define FORCEINLINE          inline __attribute__ ((always_inline))
-		#else
-			#define FORCEINLINE inline
+		#ifndef FORCEINLINE
+			#if __GNUC__ >= 4
+				#define FORCEINLINE          inline __attribute__ ((always_inline))
+			#else
+				#define FORCEINLINE inline
+			#endif
 		#endif
 		#define GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
 	#else
